@@ -1,17 +1,30 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- router -->
+    <router-link to="/home">home</router-link>
+    <router-link to="/sub">sub</router-link>
+    <router-view></router-view>
+    <!-- vuex -->
+    <div @click="addCount">{{ $store.state.count }}</div>
+    <div @click="asyncAddCount">{{ $store.state.count }}</div>
+    <div>{{ $store.getters }}</div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  methods: {
+    addCount () {
+      this.$store.commit('addCount')
+    },
+    asyncAddCount () {
+      this.$store.dispatch('addCount')
+    }
   }
 }
 </script>
